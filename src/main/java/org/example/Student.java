@@ -1,5 +1,8 @@
 package org.example;
 
+import lombok.Getter;
+
+@Getter
 public class Student {
     private String studentId;
     private String studentName;
@@ -8,4 +11,6 @@ public class Student {
     private Department department;
     private Course[] registeredCourses;
     private static int nextId;
+
+
 }

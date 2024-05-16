@@ -3,27 +3,16 @@ package org.example;
 public class Main {
     // DO NOT FORGET DOCUMENTATIONS
     public static void main(String[] args) {
-        toTitleCase1("HI there");
+        System.out.println(toTitleCase("HI there"));
     }
-    public static  String toTitleCase1(String strIn) {
+    public static String toTitleCase(String strIn) {
         strIn.toLowerCase();
         String strOut = "";
-        int numOfSpaces = 0;
+        int spaceIdx = strIn.indexOf(' ');
 
-        for (int i = 0; i < strIn.length(); i++) {
-            char c = strIn.charAt(i);
-            if (c == ' ') {
-                numOfSpaces++;
-            }
-        }
+        (strIn.charAt(0) + "").toUpperCase();
+        (strIn.charAt(spaceIdx + 1) + "").toUpperCase();
 
-        String[] arrOfStr = strIn.split(" ", numOfSpaces);
-
-        for (String a : arrOfStr) {
-            (a.charAt(0) + " ").toUpperCase();
-            strOut += a;
-        }
-
-        return "strOut";
+        return strIn;
     }
 }
