@@ -19,10 +19,10 @@ public class Course {
     private double[] finalScores;
     private static int nextId;
 
-    public void addAssignment(String assignmentName, double weight, int maxScore) {
+    public boolean addAssignment(String assignmentName, double weight, int maxScore) {
         int studentAmount = registeredStudents.size();
         Assignment assignment = new Assignment(assignmentName, weight, maxScore, studentAmount)
-        assignments.add(assignment);
+        assignments.add(assignment); // it should return false if we cannot add the assignment
     }
 
     public boolean isAssignmentWeightValid() {
