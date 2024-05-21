@@ -12,5 +12,4 @@ public class Student {
     private Course[] registeredCourses;
     private static int nextId;
 
-
 }
