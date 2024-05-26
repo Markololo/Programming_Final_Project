@@ -15,3 +15,11 @@ public class Department {
         return true;
     }
 }
+/*
+static boolean validateDepartmentName(String departmentName) // checks if a department name is valid or not, a department name should only contain letters or space
+Constructor // if the departmentName is invalid, create the object with everything as null;
+toString
+equals
+getter
+setter
+ */
