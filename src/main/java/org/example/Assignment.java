@@ -45,7 +45,21 @@ public class Assignment {
         };
     }
     public void calcAssignmentAvg() {
+        double sum = 0;
+        int scoresSize = scores.size();
+        for (int i = 0; i < scoresSize; i++) {
+            sum += scores.get(i);
+        }
+        assignmentAvg = sum / scoresSize;
+    }
 
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "assignmentName='" + assignmentName + '\'' +
+                ", weight=" + weight +
+                ", maxScore=" + maxScore +
+                '}';
     }
 }
 
