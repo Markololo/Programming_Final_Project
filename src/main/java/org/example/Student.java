@@ -1,25 +1,78 @@
 package org.example;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 
 @Getter
+@Setter
+@EqualsAndHashCode
 public class Student {
     private String studentId;
     private String studentName;
     private Gender gender;
     private Address address;
     private Department department;
-    private Course[] registeredCourses;
+    private ArrayList<Course> registeredCourses;
     private static int nextId;
 
+    public boolean registerCourse(Course course) {
+        // Check if the course is already registered
+        if (registeredCourses.contains(course)) {
+            return false;
+        }
+
+        registeredCourses.add(course);
+        course.getRegisteredStudents().add(this);
+
+        // Append null for the scores of each assignment of the course
+        for (Assignment assignment : course.getAssignments()) {
+            int[] scores = assignment.getScores();
+            int[] newScores = new int[scores.length + 1];
+            System.arraycopy(scores, 0, newScores, 0, scores.length);
+            newScores[scores.length] = -1; // Using -1 to represent null scores
+            assignment.setScores(newScores);
+        }
+
+        return true;
+    }
+    public boolean dropCourse(Course course) {
+        if (registeredCourses.contains(course)) {
+            registeredCourses.remove(course);
+            course.getRegisteredStudents().remove(this);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public Student(String studentName, Gender gender, Address address, Department department) {
+        this.studentName = studentName;
+        this.gender = gender;
+        this.address = address;
+        this.department = department;
+        this.studentId = String.format("S%06d", nextId);
+        this.registeredCourses = new ArrayList<>();
+    }
+    public String toSimplifiedString(Student student) { // call this method in the Course toString
+        return String.format("%s, %s, %s", student.studentId, student.studentName, student.department.getDepartmentName());
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses"/*here is not complete*/ +
+                '}';
+    }
 }
 /*
-boolean registerCourse(Course course) // registers a course, this method (1) adds the course to the student's registeredCourses list, (2) adds the student to the course's registeredStudents list, (3) appends a null for the scores of each assignment of the course. If the course is already registered, directly returns false
-boolean dropCourse(Course course) // drops a course, remove the course from the student's registeredCourses list, and remove the student from the course's registeredStudents list. If the course is not registered yet, directly returns false
-Constructor with studentName, gender, address, and department, it will create a student with studentId automatically generated based on the nextId, and registeredCourses as empty object
-toSimplifiedString // converts a student to a simple string with only the studentId, the studentName, and departmentName. This method is called in Course toString().
-toString // converts a student to a string that contains the studentId, the studentName, the gender, the address and the department, and the registeredCourses (only the courseId, the courseName, and the departmentName)
-equals
-getters
-setters
+toString // converts a student to a string that contains the studentId, the studentName,
+    the gender, the address and the department, and the registeredCourses (only the courseId, the courseName, and the departmentName)
+
  */
