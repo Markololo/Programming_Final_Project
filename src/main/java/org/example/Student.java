@@ -3,6 +3,7 @@ package org.example;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.util.Util;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class Student {
         }
     }
     public Student(String studentName, Gender gender, Address address, Department department) {
-        this.studentName = studentName;
+        this.studentName = Util.toTitleCase(studentName);
         this.gender = gender;
         this.address = address;
         this.department = department;
