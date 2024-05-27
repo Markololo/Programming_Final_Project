@@ -148,6 +148,12 @@ public class Course {
         this.finalScores = new ArrayList<>();
     }
 
+    public Course(String courseName, Department department) {
+        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%02d", nextId++);;
+        this.courseName = courseName;
+        this.department = department;
+    }
+
     /**
      * converts a course to a string that contains the courseId, the courseName, the credits,
      * the departmentName the assignments, and the registeredStudents (only the studentId, the studentName and the departmentName)

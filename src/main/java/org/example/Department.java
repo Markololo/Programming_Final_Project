@@ -13,8 +13,13 @@ import org.example.util.Util;
 public class Department {
     private String departmentId;
     private String departmentName;
-    private static int nextId;
+    private static int nextId = 1;
 
+    /**
+     *  checks if a department name is valid or not, a department name should only contain letters or space
+     * @param departmentName the entered department name
+     * @return true if the department name is valid, else false
+     */
     public static boolean validateDepartmentName(String departmentName) {
         boolean isValid;
 
@@ -27,7 +32,12 @@ public class Department {
         }
         return true;
     }
-    public Department(String departmentId, String departmentName) {
+
+    /**
+     * Constructor for department, if the departmentName is invalid it create the object with everything as null
+     * @param departmentName name of the department
+     */
+    public Department(String departmentName) {
         if (validateDepartmentName(departmentName)){
             this.departmentId = String.format("D%02d", nextId++);
             this.departmentName = Util.toTitleCase(departmentName);
