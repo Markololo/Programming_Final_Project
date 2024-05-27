@@ -85,21 +85,32 @@ public class Student {
         return String.format("%s, %s, %s", student.studentId, student.studentName, student.department.getDepartmentName());
     }
 
+    /**
+     *  converts a student to a string that contains the studentId, the studentName, the gender, the address and the
+     *  department, and the registeredCourses (only the courseId, the courseName, and the departmentName)
+     * @return the string representing the student
+     */
     @Override
     public String toString() {
+        String coursesString = "";
+        for (Course course : registeredCourses) {
+            coursesString += "(" +
+                    "CourseId='" + course.getCourseId() + '\'' +
+                    ", CourseName='" + course.getCourseName() + '\'' +
+                    ", DepartmentName='" + course.getDepartment().getDepartmentName() + '\'' +
+                    "), ";
+        }
+        if (!coursesString.isEmpty()) {
+            coursesString = coursesString.substring(0, coursesString.length() - 2); // Remove last comma and space
+        }
+
         return "Student{" +
                 "studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", gender=" + gender +
                 ", address=" + address +
                 ", department=" + department +
-                ", registeredCourses=" + registeredCourses +
+                ", registeredCourses=[" + coursesString + "]" +
                 '}';
     }
 }
-/*
-toString // converts a student to a string that contains the studentId, the studentName,
-    the gender, the address and the department, and the registeredCourses
-    (only the courseId, the courseName, and the departmentName)
-
- */
