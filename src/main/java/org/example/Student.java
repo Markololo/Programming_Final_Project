@@ -28,13 +28,13 @@ public class Student {
         course.getRegisteredStudents().add(this);
 
         // Append null for the scores of each assignment of the course
-        for (Assignment assignment : course.getAssignments()) {
-            int[] scores = assignment.getScores();
-            int[] newScores = new int[scores.length + 1];
-            System.arraycopy(scores, 0, newScores, 0, scores.length);
-            newScores[scores.length] = -1; // Using -1 to represent null scores
-            assignment.setScores(newScores);
-        }
+//        for (Assignment assignment : course.getAssignments()) {
+//            int[] scores = assignment.getScores();
+//            int[] newScores = new int[scores.length + 1];
+//            System.arraycopy(scores, 0, newScores, 0, scores.length);
+//            newScores[scores.length] = -1; // Using -1 to represent null scores
+//            assignment.setScores(newScores);
+//        }
 
         return true;
     }

@@ -19,22 +19,17 @@ public class Assignment {
     private ArrayList<Double> scores;
     private static int nextId = 1;
 
-//    public Assignment(String assignmentName, double weight, int maxScore, int studentAmount) {
-//        this.assignmentName = assignmentName;
-//        this.weight = weight;
-//        this.maxScore = maxScore;
-//        this.assignmentAvg = 0;
-//        this.scores = ;
-//    }
-
-    public Assignment(String assignmentName, double weight, int maxScore, int studentAmount) {
-        this.assignmentName = assignmentName;
-        this.weight = weight;
-        this.maxScore = maxScore;
-    }
-
-    Random rand = new Random();
+    /**
+     * generates random scores for all students in an assignment, the scores are generated with the following rule:
+     * Firstly generate a random number in range [0, 10], then
+     * if the number is 0, then generate a random score in range [0, 60) for the student
+     * if the number is 1, 2, then generate a random score in range [60, 70) for the student
+     * if the number is 3, 4, then generate a random score in range [70, 80) for the student
+     * if the number is 5, 6, 7, 8, then generate a random score in range [80, 90) for the student
+     * if the number is 9, 10, then generate a random score in range [90, 100] for the student
+     */
     public void generateRandomScore() {
+        Random rand = new Random();
         int randForScore = rand.nextInt(0, 11);
         int score = switch (randForScore) {
             case 0 -> rand.nextInt(0, 60);
@@ -44,6 +39,10 @@ public class Assignment {
             default -> rand.nextInt(90, 101);
         };
     }
+
+    /**
+     * calculates the average score for one assignment and assigns it to assignmentAvg
+     */
     public void calcAssignmentAvg() {
         double sum = 0;
         int scoresSize = scores.size();
@@ -52,7 +51,11 @@ public class Assignment {
         }
         assignmentAvg = sum / scoresSize;
     }
-
+    public Assignment(String assignmentName, double weight, int maxScore, int studentAmount) {
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.maxScore = maxScore;
+    }
     @Override
     public String toString() {
         return "Assignment{" +
@@ -62,10 +65,3 @@ public class Assignment {
                 '}';
     }
 }
-
-//void calcAssignmentAvg() // calculates the average score for one assignment
-//
-//void generateRandomScore() // generates random scores for all students in an assignment,
-
-//toString // generates a string to represent an assignment, with assignmentId, assignmentName,
-// weight and maxScore

@@ -68,9 +68,11 @@ public class Course {
             return false;
         }
         registeredStudents.add(student);
-        for (Assignment assignment : assignments) {
-            assignment.add(null);
+
+        for (int i = 0; i < assignments.size(); i++) {
+            assignments.get(i).getScores().add(null);
         }
+
         finalScores.add(null);
         return true;
     }
@@ -103,15 +105,52 @@ public class Course {
             }
         }
     }
+    public void displayScores() {
+        for (Assignment assignment : assignments) {
+            System.out.println("Assignment: " + assignment.getAssignmentName());
+            ArrayList<Double> scores = assignment.getScores();
+            for (int i = 0; i < scores.size(); i++) {
+                Student student = registeredStudents.get(i);
+                System.out.println("Student: " + student.getStudentId() + " " + student.getStudentName() + ", Score: " + (scores.get(i) == -1 ? "Not graded" : scores.get(i)));
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * converts a course to a simple string with only the courseId, courseName, credits, and departmentName
+     * @return the simplified string containing the course's name, id, credits and department name
+     */
+    public String toSimplifiedString() {
+        return String.format("CourseId: %s, CourseName: %s, Credits: %d, DepartmentName: %s",
+                courseId, courseName, credits, department.getDepartmentName());
+    }
     public Course(String courseId, String courseName, double credits, Department department, ArrayList<Assignment> assignments,
                   ArrayList<Student> registeredStudents, ArrayList<Double> finalScores) {
-        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%03d", (int)(Math.random() * 1000));
+        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%02d", courseId);
         this.courseName = Util.toTitleCase(courseName);
         this.credits = credits;
         this.department = department;
         this.assignments = new ArrayList<>();
         this.registeredStudents = new ArrayList<>();
         this.finalScores = new ArrayList<>();
+    }
+
+    /**
+     * converts a course to a string that contains the courseId, the courseName, the credits,
+     * the departmentName the assignments, and the registeredStudents (only the studentId, the studentName and the departmentName)
+     * @return a string representing the course
+     */
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                ", assignments=" + assignments +
+                ", registeredStudents=" + registeredStudents +
+                '}';
     }
 }
 /*
@@ -125,9 +164,5 @@ void displayScores() // displays the scores of a course in a table, with the ass
           Yi Wang             91             68             82             83             83             82
 
           Average             90             81             81             78             84
-String toSimplifiedString() // converts a course to a simple string with only the courseId, courseName, credits, and departmentName.
-
-String toString() // converts a course to a string that contains the courseId, the courseName, the credits,
-the departmentName the assignments, and the registeredStudents (only the studentId, the studentName and the departmentName)
 
  */
