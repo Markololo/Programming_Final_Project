@@ -3,8 +3,10 @@ package org.example;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.util.Util;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -17,12 +19,12 @@ public class Course {
     private ArrayList<Assignment> assignments;
     private ArrayList<Student> registeredStudents;
     private ArrayList<Double> finalScores;
-    private static int nextId;
+    private static int nextId = 1;
 
     /**
      * adds a new assignment to the course and returns true if the assignment is added. If the assignment already
      * exists it does not add it again and returns false
-     * @param assignmentName name of the cours's assignment
+     * @param assignmentName name of the course's assignment
      * @param weight weight of the assignment
      * @param maxScore maximum
      * @return true if assignment is added successfully
@@ -51,6 +53,7 @@ public class Course {
             totalWeight += assignment.getWeight();
         }
         return totalWeight == 1;
+
     }
 
     /**
@@ -65,7 +68,9 @@ public class Course {
             return false;
         }
         registeredStudents.add(student);
-        assignments.add(null);
+        for (Assignment assignment : assignments) {
+            assignment.add(null);
+        }
         finalScores.add(null);
         return true;
     }
@@ -75,16 +80,41 @@ public class Course {
      * @return the weighted average score of a student
      */
     public int[] calcStudentAvg() {
-        int[] weightedAvg = new int[];
+        int[] weightedAvg = new int[assignments.size()];
+
+        for (Assignment assignment: assignments){
+            for (int i = 0; i < assignments.size(); i++) {
+               // weightedAvg[i] = assignment.getWeight() * ;
+            }
+        }
 
         return weightedAvg;
     }
+
+    /**
+     * generates random scores for each assignment and student, and calculates the final score for each student
+     */
+    public void generateScores() {
+        Random rand = new Random();
+        for (Assignment assignment: assignments) {
+            for (int i = 0; i < registeredStudents.size(); i++) {
+                double randomScore = rand.nextDouble(0, 101);
+                assignment.getScores().set(i, randomScore);
+            }
+        }
+    }
+    public Course(String courseId, String courseName, double credits, Department department, ArrayList<Assignment> assignments,
+                  ArrayList<Student> registeredStudents, ArrayList<Double> finalScores) {
+        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%03d", (int)(Math.random() * 1000));
+        this.courseName = Util.toTitleCase(courseName);
+        this.credits = credits;
+        this.department = department;
+        this.assignments = new ArrayList<>();
+        this.registeredStudents = new ArrayList<>();
+        this.finalScores = new ArrayList<>();
+    }
 }
 /*
-int[] calcStudentsAverage() // calculates the weighted average score of a student.
-
-void generateScores() // generates random scores for each assignment and student, and calculates the final score for each student.
-
 void displayScores() // displays the scores of a course in a table, with the assignment averages and student weighted average
 
   example:
@@ -97,11 +127,7 @@ void displayScores() // displays the scores of a course in a table, with the ass
           Average             90             81             81             78             84
 String toSimplifiedString() // converts a course to a simple string with only the courseId, courseName, credits, and departmentName.
 
-String toString() // converts a course to a string that contains the courseId, the courseName, the credits, the departmentName the assignments, and the registeredStudents (only the studentId, the studentName and the departmentName)
+String toString() // converts a course to a string that contains the courseId, the courseName, the credits,
+the departmentName the assignments, and the registeredStudents (only the studentId, the studentName and the departmentName)
 
-equals
-
-getter
-
-setter
  */

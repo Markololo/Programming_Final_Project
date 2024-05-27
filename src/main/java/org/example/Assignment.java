@@ -17,7 +17,7 @@ public class Assignment {
     private int maxScore;
     private double assignmentAvg;
     private ArrayList<Double> scores;
-    private static int nextId;
+    private static int nextId = 1;
 
 //    public Assignment(String assignmentName, double weight, int maxScore, int studentAmount) {
 //        this.assignmentName = assignmentName;
