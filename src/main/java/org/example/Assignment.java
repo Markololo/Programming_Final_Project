@@ -51,11 +51,22 @@ public class Assignment {
         }
         assignmentAvg = sum / scoresSize;
     }
-    public Assignment(String assignmentName, double weight, int maxScore, int studentAmount) {
+    public Assignment(String assignmentName, double weight, int maxScore) {
         this.assignmentName = assignmentName;
         this.weight = weight;
         this.maxScore = maxScore;
+        nextId++;
     }
+
+    public Assignment(String assignmentId, String assignmentName, double weight, int maxScore, double assignmentAvg, ArrayList<Double> scores) {
+        this.assignmentId = String.format("A%02d", nextId++);
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.maxScore = maxScore;
+        this.assignmentAvg = assignmentAvg;
+        this.scores = scores;
+    }
+
     @Override
     public String toString() {
         return "Assignment{" +

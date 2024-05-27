@@ -38,7 +38,7 @@ public class Course {
         }
         // Add the new assignment
         int studentAmount = registeredStudents.size();
-        Assignment assignment = new Assignment(assignmentName, weight, maxScore, studentAmount);
+        Assignment assignment = new Assignment(assignmentName, weight, maxScore);
         assignments.add(assignment);
         return true;
     }
@@ -82,6 +82,15 @@ public class Course {
      * @return the weighted average score of a student
      */
     public int[] calcStudentAvg() {
+//        int [] sums = new int[registeredStudents.size()];
+//        for (int i = 0; i < registeredStudents.size(); i++) {
+//            double sum = 0;
+//            for (Assignment assignment: assignments) {
+//                sum += assignment.getScores().get(i);
+//            }
+//            sums[i] = (int) (sum / assignments.size());
+//        }
+//        return sums;
         int[] weightedAvg = new int[assignments.size()];
 
         for (Assignment assignment: assignments){
@@ -89,7 +98,6 @@ public class Course {
                // weightedAvg[i] = assignment.getWeight() * ;
             }
         }
-
         return weightedAvg;
     }
 
@@ -105,17 +113,35 @@ public class Course {
             }
         }
     }
+
+    /**
+     * displays the scores of a course in a table, with the assignment averages and student weighted average
+     */
     public void displayScores() {
-        for (Assignment assignment : assignments) {
-            System.out.println("Assignment: " + assignment.getAssignmentName());
-            ArrayList<Double> scores = assignment.getScores();
-            for (int i = 0; i < scores.size(); i++) {
-                Student student = registeredStudents.get(i);
-                System.out.println("Student: " + student.getStudentId() + " " + student.getStudentName() + ", Score: " + (scores.get(i) == -1 ? "Not graded" : scores.get(i)));
-            }
-            System.out.println();
+        for (Assignment assignment: assignments) {
+
         }
     }
+    /*
+  Course: Programming 1(C-D00-01)
+                    Assignment01   Assignment02   Assignment03         Exam01         Exam02    Final Score
+          Yi Wang             82             82             76             85             80             82
+          Yi Wang             97             92             84             67             90             83
+          Yi Wang             91             68             82             83             83             82
+
+          Average             90             81             81             78             84
+ */
+//    public void displayScores() {
+//        for (Assignment assignment : assignments) {
+//            System.out.println("Assignment: " + assignment.getAssignmentName());
+//            ArrayList<Double> scores = assignment.getScores();
+//            for (int i = 0; i < scores.size(); i++) {
+//                Student student = registeredStudents.get(i);
+//                System.out.println("Student: " + student.getStudentId() + " " + student.getStudentName() + ", Score: " + (scores.get(i) == -1 ? "Not graded" : scores.get(i)));
+//            }
+//            System.out.println();
+//        }
+    //}
 
     /**
      * converts a course to a simple string with only the courseId, courseName, credits, and departmentName
@@ -153,16 +179,3 @@ public class Course {
                 '}';
     }
 }
-/*
-void displayScores() // displays the scores of a course in a table, with the assignment averages and student weighted average
-
-  example:
-  Course: Programming 1(C-D00-01)
-                    Assignment01   Assignment02   Assignment03         Exam01         Exam02    Final Score
-          Yi Wang             82             82             76             85             80             82
-          Yi Wang             97             92             84             67             90             83
-          Yi Wang             91             68             82             83             83             82
-
-          Average             90             81             81             78             84
-
- */

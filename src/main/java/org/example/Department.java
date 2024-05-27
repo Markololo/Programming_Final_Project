@@ -28,7 +28,7 @@ public class Department {
     }
     public Department(String departmentId, String departmentName) {
         if (validateDepartmentName(departmentName)){
-            this.departmentId = departmentId;
+            this.departmentId = String.format("D%02d", nextId++);
             this.departmentName = departmentName;
         } else {
             this.departmentId = null;
