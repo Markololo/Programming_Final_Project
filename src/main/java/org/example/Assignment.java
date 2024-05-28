@@ -2,12 +2,14 @@ package org.example;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -52,6 +54,9 @@ public class Assignment {
         double sum = 0;
         int scoresSize = scores.size();
         for (int i = 0; i < scoresSize; i++) {
+            if (scores.get(i) == null) {
+                scores.set(i, 0);
+            }
             sum += scores.get(i);
         }
         this.assignmentAvg = sum / scoresSize;

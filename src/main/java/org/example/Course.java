@@ -85,18 +85,22 @@ public class Course {
      */
     public int[] calcStudentsAvg() {
         int[] studentAverages = new int[registeredStudents.size()];
+        boolean isScoreValid = false;
 
         for (int i = 0; i < registeredStudents.size(); i++) {
             double totalWeightedScore = 0;
             for (Assignment assignment : assignments) {
                 int score = assignment.getScores().get(i);
-                if (score != -1) { // Only consider non-null scores
+                if (score >= 0 && score <= 100) {
                     totalWeightedScore += score * assignment.getWeight();
-                } else { // score is null
-                    return null;
+                    isScoreValid = true;
                 }
             }
-            studentAverages[i] = (int) totalWeightedScore;
+            if (isScoreValid) {
+                studentAverages[i] = (int) Math.round(totalWeightedScore);
+            } else {
+                studentAverages[i] = 0;
+            }
         }
         return studentAverages;
     }
@@ -181,6 +185,7 @@ public class Course {
         this.assignments = new ArrayList<>();
         this.registeredStudents = new ArrayList<>();
         this.finalScores = new ArrayList<>();
+        generateScores();
     }
 
     /**

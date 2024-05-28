@@ -1,4 +1,5 @@
 import org.example.Assignment;
+import org.example.Course;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,5 +42,59 @@ public class AssignmentTest {
         double expectedResult = 0;
         double result = assignment.getAssignmentAvg();
         assertEquals(expectedResult, result);
+    }
+    @Test
+    public void testIsAssignmentWeightValid1() {
+        Course course = new Course();
+        course.setAssignments(new ArrayList<>());
+
+        Assignment assignment1 = new Assignment();
+        assignment1.setWeight(0.4);
+        course.getAssignments().add(assignment1);
+
+        Assignment assignment2 = new Assignment();
+        assignment2.setWeight(0.6);
+        course.getAssignments().add(assignment2);
+
+        boolean result = course.isAssignmentWeightValid();
+        boolean expectedResult =  true;
+
+        Assertions.assertEquals(result, expectedResult);
+    }
+    @Test
+    public void testIsAssignmentWeightValid2() {
+        Course course = new Course();
+        course.setAssignments(new ArrayList<>());
+
+        Assignment assignment1 = new Assignment();
+        assignment1.setWeight(0.1);
+        course.getAssignments().add(assignment1);
+
+        Assignment assignment2 = new Assignment();
+        assignment2.setWeight(0.6);
+        course.getAssignments().add(assignment2);
+
+        boolean result = course.isAssignmentWeightValid();
+        boolean expectedResult =  false;
+
+        Assertions.assertEquals(result, expectedResult);
+    }
+    @Test
+    public void testIsAssignmentWeightValid3() {
+        Course course = new Course();
+        course.setAssignments(new ArrayList<>());
+
+        Assignment assignment1 = new Assignment();
+        assignment1.setWeight(-4);
+        course.getAssignments().add(assignment1);
+
+        Assignment assignment2 = new Assignment();
+        assignment2.setWeight(0.6);
+        course.getAssignments().add(assignment2);
+
+        boolean result = course.isAssignmentWeightValid();
+        boolean expectedResult = false;
+
+        Assertions.assertEquals(result, expectedResult);
     }
 }
