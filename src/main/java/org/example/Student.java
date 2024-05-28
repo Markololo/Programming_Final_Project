@@ -59,23 +59,6 @@ public class Student {
     }
 
     /**
-     * Constructor to create a student with studentName, gender, address, and department, it will create a student
-     * with studentId automatically generated based on the nextId, and registeredCourses as empty object
-     * @param studentName name of the student
-     * @param gender gender of the student, either male or female
-     * @param address student's address
-     * @param department student's department
-     */
-    public Student(String studentName, Gender gender, Address address, Department department) {
-        this.studentName = Util.toTitleCase(studentName);
-        this.gender = gender;
-        this.address = address;
-        this.department = department;
-        this.studentId = String.format("S%06d", nextId);
-        this.registeredCourses = new ArrayList<>();
-    }
-
-    /**
      * converts a student to a simple string with only the studentId, the studentName,
      * and departmentName.
      * @param student the entered Student object
@@ -112,5 +95,22 @@ public class Student {
                 ", department=" + department +
                 ", registeredCourses=[" + coursesString + "]" +
                 '}';
+    }
+
+    /**
+     * Constructor to create a student with studentName, gender, address, and department, it will create a student
+     * with studentId automatically generated based on the nextId, and registeredCourses as empty object
+     * @param studentName name of the student
+     * @param gender gender of the student, either male or female
+     * @param address student's address
+     * @param department student's department
+     */
+    public Student(String studentName, Gender gender, Address address, Department department) {
+        this.studentName = Util.toTitleCase(studentName);
+        this.gender = gender;
+        this.address = address;
+        this.department = department;
+        this.studentId = String.format("S%06d", nextId);
+        this.registeredCourses = new ArrayList<>();
     }
 }
